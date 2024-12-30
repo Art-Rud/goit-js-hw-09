@@ -53,7 +53,20 @@ form.addEventListener('submit', event => {
   formData.message = '';
   localStorage.clear();
 });
-
+const getValue = () => {
+  try {
+    const formLS = JSON.parse(localStorage.getItem('feedback-form-state'));
+    if (formLS.email !== null || formLS.message !== null) {
+      input.value = formLS.email;
+      textArea.value = formLS.message;
+      formData.email = formLS.email;
+      formData.message = formLS.message;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+getValue();
 // const handler = event => {
 //   if (event.type === 'focus') {
 //     if (event.target.tagName === 'INPUT') {
@@ -92,21 +105,8 @@ form.addEventListener('submit', event => {
 //     }
 //   }
 // };
-const getValue = () => {
-  try {
-    const formLS = JSON.parse(localStorage.getItem('feedback-form-state'));
-    if (formLS.email !== null || formLS.message !== null) {
-      input.value = formLS.email;
-      textArea.value = formLS.message;
-      formData.email = formLS.email;
-      formData.message = formLS.message;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+
 // form.addEventListener('focus', handler, true);
 // form.addEventListener('blur', handler, true);
 // form.addEventListener('submit', handler);
 // form.addEventListener('input', handler);
-getValue();
