@@ -45,18 +45,19 @@ form.addEventListener('submit', event => {
   event.preventDefault();
   if (!formData.email || !formData.message) {
     alert('Fill please all fields');
+    return;
   }
   console.log(formData);
   input.value = '';
   textArea.value = '';
   formData.email = '';
   formData.message = '';
-  localStorage.clear();
+  localStorage.removeItem('feedback-form-state');
 });
 const getValue = () => {
   try {
     const formLS = JSON.parse(localStorage.getItem('feedback-form-state'));
-    if (formLS.email !== null || formLS.message !== null) {
+    if (formLS.email !== undefined || formLS.message !== undefined) {
       input.value = formLS.email;
       textArea.value = formLS.message;
       formData.email = formLS.email;
